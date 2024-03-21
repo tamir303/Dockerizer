@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: pythonDockerizer
+Version: 0.1
+Summary: Generate a Dockerfile based on Python version and dependencies
+Home-page: https://github.com/tamir303/Dockerizer
+Author: Tamir Spilberg
+License: MIT
+License-File: LICENSE

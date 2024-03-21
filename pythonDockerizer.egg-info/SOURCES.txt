@@ -1,0 +1,10 @@
+LICENSE
+README.md
+setup.py
+pythonDockerizer/__init__.py
+pythonDockerizer/dockerize.py
+pythonDockerizer.egg-info/PKG-INFO
+pythonDockerizer.egg-info/SOURCES.txt
+pythonDockerizer.egg-info/dependency_links.txt
+pythonDockerizer.egg-info/entry_points.txt
+pythonDockerizer.egg-info/top_level.txt
