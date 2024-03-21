@@ -1,18 +1,19 @@
 import logging
 import subprocess
-from enum import Enum
+from abc import ABC
 
 logger = logging.getLogger(__name__)
 
 
-class DefaultPaths(Enum):
-    VERSION = "latest"
-    FILENAME = "Dockerfile"
-    PORT = 80
-    DEST_PATH = "./"
+class DefaultPaths(ABC):
+    ENTRYPOINT: str = "app"
+    VERSION: str = "latest"
+    FILENAME: str = "Dockerfile"
+    PORT: int = 80
+    DEST_PATH: str = "./"
 
 
-def create_docker_file(entrypoint: str,
+def create_docker_file(entrypoint: str = DefaultPaths.ENTRYPOINT,
                        version: str = DefaultPaths.VERSION,
                        filename: str = DefaultPaths.FILENAME,
                        port: int = DefaultPaths.PORT,
@@ -62,7 +63,7 @@ EXPOSE {port}
 CMD [ "python", "{entrypoint}.py" ]
 """
     # Write the Dockerfile content to a file
-    with open(dest_path + filename, "w") as f:
+    with open("".join([dest_path, filename]), "w") as f:
         f.write(dockerfile_content)
 
     logger.info(f"Created Dockerfile: {filename}")
@@ -73,7 +74,7 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description='Generate Dockerfile')
-    parser.add_argument('--entrypoint', type=str, help='Name of the entrypoint file', required=True)
+    parser.add_argument('--entrypoint', type=str, default=DefaultPaths.ENTRYPOINT, help='Name of the entrypoint file')
     parser.add_argument('--version', type=str, default=DefaultPaths.VERSION, help='Python version (default: latest)')
     parser.add_argument('--filename', type=str, default=DefaultPaths.FILENAME,
                         help='Name of the Dockerfile (default: Dockerfile)')
