@@ -1,0 +1,16 @@
+FROM python:{{ version }}
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the source code into the container
+COPY . /app
+
+# Install dependencies
+{% if install_cond != 'None' %}
+RUN pip install {{ install_cond }}
+{% endif %}
+
+EXPOSE {{ port }}
+
+CMD ["python", "{{ entrypoint }}"]
